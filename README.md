@@ -15,6 +15,7 @@ Note: Make sure cmake and gcc are installed.
 1. install Glade first.
 
 `sudo apt update && sudo apt install glade -y`
+> note that you can skip this if you don't want to see the ui.
 
 2. install libgtk-3-dev
 
