@@ -4,9 +4,12 @@
 typedef struct {
     GtkWidget *w_web_view;
     GtkWidget *w_web_view2;
+    GtkWidget *w_txtvw_main;            // Pointer to text view object
+    GtkWidget *w_dlg_file_choose;       // Pointer to file chooser dialog box
+    GtkTextBuffer *textbuffer_main;     // Pointer to text buffer
+    GtkWidget *w_about_box;             // Pointer to about dialog box
 } app_widgets;
 
-//if it's run, then leave it alone. don't messed up anything, just leave it run.
 int main(int argc, char *argv[])
 {
     GtkBuilder      *builder; 
@@ -25,11 +28,13 @@ int main(int argc, char *argv[])
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window_main"));
     widgets->w_web_view  = GTK_WIDGET(gtk_builder_get_object(builder, "url_1"));
     widgets->w_web_view2 = GTK_WIDGET(gtk_builder_get_object(builder, "url_2"));
-    
+    widgets->w_about_box = GTK_WIDGET(gtk_builder_get_object(builder, "about_box"));
+
     gtk_builder_connect_signals(builder, widgets);
     
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://classroom.google.com");
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://meet.google.com");
+
 
     g_object_unref(builder);
 
@@ -40,22 +45,18 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-//test
-// void on_window_main_activate_default()
-// {
+// Help --> About
+void on_about_menu_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
+{
+    gtk_widget_show(app_wdgts->w_about_box);
+}
 
-// }
+// About dialog box Close button
+void on_about_box_response(GtkDialog *dialog, gint response_id, app_widgets *app_wdgts)
+{
+    gtk_widget_hide(app_wdgts->w_about_box);
+}
 
-// User presses Enter in the URL bar
-// void on_url_entry_activate(GtkEntry *entry, app_widgets *app_wdgts)
-// {
-//     const gchar *the_url;
-//     const gchar *the_url2;
-    
-//     the_url = gtk_entry_get_text(entry);
-    
-//     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(app_wdgts->w_web_view), the_url);
-// }
 // called when window is closed
 void on_window_main_destroy()
 {
