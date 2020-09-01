@@ -1,5 +1,5 @@
 # Simple-Web-Browser
-A Simple Split Web Browser using GTK3 and Glade
+A Simple Split Web Browser using GTK3 and Glade *only opening Google Meet and Google Classroom at the same time
 
 # Prerequisite
 
