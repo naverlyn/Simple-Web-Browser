@@ -13,16 +13,21 @@ Note: Make sure cmake and gcc are installed.
 # Install
 
 1. install Glade first.
-'sudo apt update && sudo apt install glade -y'
+
+`sudo apt update && sudo apt install glade -y`
 
 2. install libgtk-3-dev
-'sudo apt install libgtk3-dev -y'
+
+`sudo apt install libgtk3-dev -y`
 
 2. install libwebkit2gtk-4.0-dev and documentation
-'sudo apt install libwebkit2gtk-4.0-dev libwebkit2gtk-4.0-doc'
+
+`sudo apt install libwebkit2gtk-4.0-dev libwebkit2gtk-4.0-doc`
 
 3. build the source using make
-'make'
+
+`make`
 
 4. run with
-'./web-browser'
+
+`./web-browser`
