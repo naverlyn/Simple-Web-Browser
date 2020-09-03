@@ -19,7 +19,7 @@ Note: Make sure cmake and gcc are installed.
 
 2. install libgtk-3-dev
 
-`sudo apt install libgtk3-dev -y`
+`sudo apt install libgtk-3-dev -y`
 
 2. install libwebkit2gtk-4.0-dev and documentation
 
