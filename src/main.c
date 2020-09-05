@@ -2,18 +2,21 @@
 #include <webkit2/webkit2.h>
 
 typedef struct {
-    GtkWidget *w_web_view;
-    GtkWidget *w_web_view2;
+    GtkWidget *w_web_view;              // url_1
+    GtkWidget *w_web_view2;             // url_2
+    GtkWidget *w_login_web;                 // login to google
     GtkWidget *w_txtvw_main;            // Pointer to text view object
     GtkWidget *w_dlg_file_choose;       // Pointer to file chooser dialog box
     GtkTextBuffer *textbuffer_main;     // Pointer to text buffer
     GtkWidget *w_about_box;             // Pointer to about dialog box
+    GtkWidget *w_login_id;              // login window
 } app_widgets;
 
 int main(int argc, char *argv[])
 {
     GtkBuilder      *builder; 
     GtkWidget       *window;
+    GtkWidget       *login;
     app_widgets     *widgets = g_slice_new(app_widgets);
 
     gtk_init(&argc, &argv);
@@ -26,23 +29,30 @@ int main(int argc, char *argv[])
     builder = gtk_builder_new_from_file("glade/ui.glade");
 
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window_main"));
+    login = GTK_WIDGET(gtk_builder_get_object(builder, "login_id"));
+
     widgets->w_web_view  = GTK_WIDGET(gtk_builder_get_object(builder, "url_1"));
     widgets->w_web_view2 = GTK_WIDGET(gtk_builder_get_object(builder, "url_2"));
     widgets->w_about_box = GTK_WIDGET(gtk_builder_get_object(builder, "about_box"));
-
+    widgets->w_login_id = GTK_WIDGET(gtk_builder_get_object(builder, "login_id"));
+    widgets->w_login_web = GTK_WIDGET(gtk_builder_get_object(builder, "login_web"));
     gtk_builder_connect_signals(builder, widgets);
-    
-    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://classroom.google.com");
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com");
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://meet.google.com");
-
-
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_login_web), "http://accounts.google.com");
     g_object_unref(builder);
-
     gtk_widget_show_all(window);
+    gtk_widget_show_all(login);
     gtk_main();
     g_slice_free(app_widgets, widgets);
 
     return 0;
+}
+
+// button login ke window login_id
+void on_login_menu_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
+{
+    gtk_widget_show(app_wdgts->w_login_id);
 }
 
 // Help --> About
