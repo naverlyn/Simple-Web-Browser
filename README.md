@@ -31,4 +31,8 @@ Note: Make sure cmake and gcc are installed.
 
 4. run with
 
-`./web-browser`
+`./web_browser`
+
+
+Known Issue:
+1. can't detect camera module and microphone.
