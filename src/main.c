@@ -10,14 +10,26 @@ typedef struct {
     GtkTextBuffer *textbuffer_main;     // Pointer to text buffer
     GtkWidget *w_about_box;             // Pointer to about dialog box
     GtkWidget *w_login_id;              // login window
+    GtkWidget *w_window;                // window test
 } app_widgets;
 
 int main(int argc, char *argv[])
 {
-    GtkBuilder      *builder; 
-    GtkWidget       *window;
-    GtkWidget       *login;
+    GtkBuilder          *builder; 
+    GtkWidget           *login;
+    //WebKitSettings   *settings;
     app_widgets     *widgets = g_slice_new(app_widgets);
+
+    gboolean
+    webkit_settings_get_enable_mock_capture_devices (WebKitSettings *settings);
+
+    gboolean
+    webkit_user_media_permission_is_for_video_device
+                               (WebKitUserMediaPermissionRequest *request);
+
+    gboolean
+    webkit_user_media_permission_is_for_audio_device
+                               (WebKitUserMediaPermissionRequest *request);
 
     gtk_init(&argc, &argv);
     
@@ -27,8 +39,6 @@ int main(int argc, char *argv[])
     webkit_settings_get_type();
 
     builder = gtk_builder_new_from_file("glade/ui.glade");
-
-    window = GTK_WIDGET(gtk_builder_get_object(builder, "window_main"));
     login = GTK_WIDGET(gtk_builder_get_object(builder, "login_id"));
 
     widgets->w_web_view  = GTK_WIDGET(gtk_builder_get_object(builder, "url_1"));
@@ -36,23 +46,50 @@ int main(int argc, char *argv[])
     widgets->w_about_box = GTK_WIDGET(gtk_builder_get_object(builder, "about_box"));
     widgets->w_login_id = GTK_WIDGET(gtk_builder_get_object(builder, "login_id"));
     widgets->w_login_web = GTK_WIDGET(gtk_builder_get_object(builder, "login_web"));
+    widgets->w_window = GTK_WIDGET (gtk_builder_get_object(builder, "window_main"));
     gtk_builder_connect_signals(builder, widgets);
-    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com");
-    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://meet.google.com");
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_login_web), "http://accounts.google.com");
     g_object_unref(builder);
-    gtk_widget_show_all(window);
-    gtk_widget_show_all(login);
+    gtk_widget_show_all(login);    
+    
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com");
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://meet.google.com/");
     gtk_main();
     g_slice_free(app_widgets, widgets);
 
     return 0;
 }
 
+// void
+// webkit_settings_set_enable_mock_capture_devices (WebKitSettings *settings, GtkWindow *w_web_view2, gboolean enabled)
+//     {
+//         g_signal_connect (settings, "enable-mock-capture-devices", (w_web_view2), NULL);
+//     }
+
+void
+webkit_settings_set_enable_media_stream
+                               (WebKitSettings *settings,
+                                gboolean enabled);
+
+void
+webkit_settings_set_allow_file_access_from_file_urls
+                               (WebKitSettings *settings,
+                                gboolean allowed);
+
+void
+webkit_settings_set_enable_webgl (WebKitSettings *settings,
+                                  gboolean enabled);
+
 // button login ke window login_id
 void on_login_menu_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
 {
     gtk_widget_show(app_wdgts->w_login_id);
+}
+
+void on_login_id_destroy(GtkWindow *window, app_widgets *app_wdgts)
+{
+    gtk_widget_show(app_wdgts->w_window);
+
 }
 
 // Help --> About
@@ -64,7 +101,13 @@ void on_about_menu_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
 // About dialog box Close button
 void on_about_box_response(GtkDialog *dialog, gint response_id, app_widgets *app_wdgts)
 {
-    gtk_widget_hide(app_wdgts->w_about_box);
+    gtk_widget_hide(app_wdgts->w_about_box);    
+}
+
+//quit
+void on_destroy_window_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
+{
+    gtk_main_quit();
 }
 
 // called when window is closed
