@@ -1,5 +1,5 @@
 # Simple-Web-Browser
-A Simple Split Web Browser using GTK3 and Glade *only opening Google Meet and Google Classroom at the same time
+A Simple Split Web Browser using GTK3 and Glade *only opening Whatsapp Web and Google Classroom at the same time
 
 # Prerequisite
 
@@ -33,6 +33,3 @@ Note: Make sure cmake and gcc are installed.
 
 `./web_browser`
 
-
-Known Issue:
-1. can't detect camera module and microphone.
