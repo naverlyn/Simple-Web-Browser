@@ -17,8 +17,12 @@ int main(int argc, char *argv[])
 {
     GtkBuilder          *builder; 
     GtkWidget           *login;
-    //WebKitSettings   *settings;
     app_widgets     *widgets = g_slice_new(app_widgets);
+
+gboolean
+user_function (WebKitWebView      *web_view,
+               WebKitScriptDialog *dialog,
+               gpointer            user_data);
 
     gboolean
     webkit_settings_get_enable_mock_capture_devices (WebKitSettings *settings);
@@ -53,41 +57,16 @@ int main(int argc, char *argv[])
     gtk_widget_show_all(login);    
     
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com");
-    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://meet.google.com/");
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://web.whatsapp.com/");
     gtk_main();
     g_slice_free(app_widgets, widgets);
 
     return 0;
 }
 
-// void
-// webkit_settings_set_enable_mock_capture_devices (WebKitSettings *settings, GtkWindow *w_web_view2, gboolean enabled)
-//     {
-//         g_signal_connect (settings, "enable-mock-capture-devices", (w_web_view2), NULL);
-//     }
-
-void
-webkit_settings_set_enable_media_stream
-                               (WebKitSettings *settings,
-                                gboolean enabled);
-
-void
-webkit_settings_set_allow_file_access_from_file_urls
-                               (WebKitSettings *settings,
-                                gboolean allowed);
-
-void
-webkit_settings_set_enable_webgl (WebKitSettings *settings,
-                                  gboolean enabled);
-
-// button login ke window login_id
-void on_login_menu_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
-{
-    gtk_widget_show(app_wdgts->w_login_id);
-}
-
 void on_login_id_destroy(GtkWindow *window, app_widgets *app_wdgts)
 {
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(app_wdgts->w_web_view), "http://classroom.google.com");
     gtk_widget_show(app_wdgts->w_window);
 
 }
@@ -107,7 +86,7 @@ void on_about_box_response(GtkDialog *dialog, gint response_id, app_widgets *app
 //quit
 void on_destroy_window_activate(GtkMenuItem *menuitem, app_widgets *app_wdgts)
 {
-    gtk_main_quit();
+        gtk_main_quit();
 }
 
 // called when window is closed
