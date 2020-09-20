@@ -24,17 +24,6 @@ user_function (WebKitWebView      *web_view,
                WebKitScriptDialog *dialog,
                gpointer            user_data);
 
-    gboolean
-    webkit_settings_get_enable_mock_capture_devices (WebKitSettings *settings);
-
-    gboolean
-    webkit_user_media_permission_is_for_video_device
-                               (WebKitUserMediaPermissionRequest *request);
-
-    gboolean
-    webkit_user_media_permission_is_for_audio_device
-                               (WebKitUserMediaPermissionRequest *request);
-
     gtk_init(&argc, &argv);
     
     // Workaround from: https://bugs.webkit.org/show_bug.cgi?id=175937
@@ -56,7 +45,7 @@ user_function (WebKitWebView      *web_view,
     g_object_unref(builder);
     gtk_widget_show_all(login);    
     
-    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com");
+    webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view), "http://google.com"); //default webpage
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(widgets->w_web_view2), "http://web.whatsapp.com/");
     gtk_main();
     g_slice_free(app_widgets, widgets);
@@ -64,6 +53,7 @@ user_function (WebKitWebView      *web_view,
     return 0;
 }
 
+//destroy login_id dan load google classroom
 void on_login_id_destroy(GtkWindow *window, app_widgets *app_wdgts)
 {
     webkit_web_view_load_uri(WEBKIT_WEB_VIEW(app_wdgts->w_web_view), "http://classroom.google.com");
