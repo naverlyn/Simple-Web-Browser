@@ -3,12 +3,51 @@
 <interface>
   <requires lib="gtk+" version="3.10"/>
   <requires lib="webkit2gtk" version="2.12"/>
+  <object class="GtkAboutDialog" id="about_box">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">About</property>
+    <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="deletable">False</property>
+    <property name="program_name">Simple Split Web Browser</property>
+    <property name="version">1.0</property>
+    <property name="copyright" translatable="yes">© 2020</property>
+    <property name="comments" translatable="yes">A simple split web browser *only open Google Meet and Google Classroom</property>
+    <property name="authors">Aula Nur Rizal Ardiyantoro</property>
+    <property name="logo_icon_name">image-missing</property>
+    <property name="license_type">gpl-3-0</property>
+    <signal name="response" handler="on_about_box_response" swapped="no"/>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="login_id">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Login</property>
     <property name="resizable">False</property>
-    <property name="default_width">320</property>
-    <property name="default_height">420</property>
+    <property name="default_width">420</property>
+    <property name="default_height">520</property>
     <property name="destroy_with_parent">True</property>
     <property name="icon">../icon/icon.png</property>
     <signal name="destroy" handler="on_login_id_destroy" swapped="no"/>
@@ -135,150 +174,6 @@
             <property name="fill">True</property>
             <property name="position">1</property>
           </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkWindow" id="window_main_deprecated">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Web Browser</property>
-    <property name="default_width">1366</property>
-    <property name="default_height">768</property>
-    <property name="destroy_with_parent">True</property>
-    <signal name="activate-default" handler="on_window_main_activate_default" swapped="no"/>
-    <signal name="destroy" handler="on_window_main_destroy" swapped="no"/>
-    <child type="titlebar">
-      <object class="GtkMenuBar">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="GtkMenuItem">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">_Help</property>
-            <property name="use_underline">True</property>
-            <child type="submenu">
-              <object class="GtkMenu">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <object class="GtkImageMenuItem" id="about_menu_deprecated">
-                    <property name="label">gtk-about</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="use_underline">True</property>
-                    <property name="use_stock">True</property>
-                    <signal name="activate" handler="on_about_menu_activate" swapped="no"/>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkMenuItem" id="destroy_window_deprecated">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">Exit</property>
-            <signal name="activate" handler="on_destroy_window_activate" swapped="no"/>
-          </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <child>
-          <object class="WebKitWebView" id="url_1_deprecated">
-            <property name="width_request">0</property>
-            <property name="height_request">0</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="related_view">login_web</property>
-            <property name="settings">settings</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="separator">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="WebKitWebView" id="url_2_deprecated">
-            <property name="width_request">0</property>
-            <property name="height_request">0</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="related_view">login_web</property>
-            <property name="settings">settings</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkAboutDialog" id="about_box">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">About</property>
-    <property name="resizable">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="deletable">False</property>
-    <property name="transient_for">window_main_deprecated</property>
-    <property name="program_name">Simple Split Web Browser</property>
-    <property name="version">1.0</property>
-    <property name="copyright" translatable="yes">© 2020</property>
-    <property name="comments" translatable="yes">A simple split web browser *only open Google Meet and Google Classroom</property>
-    <property name="authors">Aula Nur Rizal Ardiyantoro</property>
-    <property name="logo_icon_name">image-missing</property>
-    <property name="license_type">gpl-3-0</property>
-    <signal name="response" handler="on_about_box_response" swapped="no"/>
-    <child type="titlebar">
-      <placeholder/>
-    </child>
-    <child internal-child="vbox">
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>
