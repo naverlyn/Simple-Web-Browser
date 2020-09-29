@@ -1,5 +1,4 @@
-# change application name here (executable output name)
-TARGET=web_browser
+TARGET=WA_Google
 
 # compiler
 CC=gcc
@@ -9,6 +8,9 @@ DEBUG=-g
 OPT=-O0
 # warnings
 WARN=-Wall
+
+#no gstreamer test
+DISABLE_GSTREAMER=ON
 
 PTHREAD=-pthread
 
