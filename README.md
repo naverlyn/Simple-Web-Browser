@@ -1,5 +1,5 @@
-# Simple-Web-Browser
-A Simple Split Web Browser using GTK3 and Glade *only opening Whatsapp Web and Google Classroom at the same time
+# Split-Browser
+A Simple Split Browser using GTK3 and Glade *only opening Whatsapp Web and Google Classroom at the same time
 
 # Prerequisite
 
